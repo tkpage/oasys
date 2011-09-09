@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>mongochat</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script src="/nowjs/now.js"></script>
+
+<script>
+$(document).ready(function(){
+	$('#text-input').bind('keyup', function(e){
+		if(e.keyCode == 13){
+			now.distributeMessage($("#text-input").val());
+			$("#text-input").val("");
+		}
+	});
+
+	now.receiveMessage = function(name, message, count){
+		$("#messages").append("<br>" + name + ": " + message);
+		$("#mongodb").text('You sent messages ' + count + ' times.');
+		$("#messages").attr({ scrollTop: $("#messages").height()});
+	}
+
+	$("#send-button").click(function(){
+		now.distributeMessage($("#text-input").val());
+		$("#text-input").val("");
+	});
+
+	now.name = prompt("What's your name?", "");
+
+});
+</script>
+</head>
+
+<body>
+  	<div id="messages" style="width:400px; height:300pt; border:1px solid black; overflow:auto;"></div><br/>
+  	<input type="text" id="text-input" style="width:340px; height:20px; border: 1px solid black;">
+  	<input type="button" value="Send" id="send-button" style="width:50px; height:25px;">
+	<div id="mongodb"></div>
+</body>
+</html>
