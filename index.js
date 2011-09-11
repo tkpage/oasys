@@ -1,30 +1,10 @@
-// nodejs
-require.paths.unshift('./node_modules')
-
-
 // server
+require.paths.unshift('./node_modules')
+var host = process.env.VCAP_APP_HOST || 'localhost';
+var port = process.env.VMC_APP_PORT || 80;
 var html = require('fs').readFileSync(__dirname+'/index.html');
 var server = require('http').createServer(function(req, res){res.end(html);});
-if(process.env.VCAP_APP_HOST){
-	var host = process.env.VCAP_APP_HOST;
-	var port = process.env.VMC_APP_PORT;
 	server.listen(port, host);
-	console.log('Server is running at ' + host + ':' + port);
-}else{
-	var socket = require('net').createConnection(80, 'www.google.com');
-	socket.on('connect', function(){
-		var host = socket.address().address;
-		var port = 80;
-		server.listen(port, host);
-		console.log('Server is running at ' + host + ':' + port);
-	});
-	socket.on('error', function(){
-		var host = 'localhost';
-		var port = 80;
-		server.listen(port, host);
-		//console.log('Server is running at ' + host + ':' + port);
-	});
-}
 
 
 // database
@@ -48,8 +28,13 @@ mongoose.model('Chat', new mongoose.Schema({
 }));
 
 
+// test
+var oasys = require('./lib/oasys');
+oasys.util.getNetworkIP(console.log);
+
+
 // handlers
-var nowjs = require("now");
+var nowjs = require('now');
 var everyone = nowjs.initialize(server);
 
 everyone.now.distributeMessage = function(message){

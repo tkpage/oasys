@@ -1,8 +1,20 @@
 {
-  "name":"test_mongo",
+  "name":"nowchat",
   "version":"0.0.1",
+  "main":"./index.js",
+  "directories":{
+  	"lib":"lib"
+  },
+  "repository":{
+  	"type": "git",
+  	"url": "git://github.com/tkpage/nowchat.git"
+  },
+  "engines": {
+  	"node": ">= 0.4.11"
+  },
   "dependencies":{
     "now":"",
-	"mongoose":""
+	"mongoose":"",
+	"Class":">= 0.1.1"
   }
 }
