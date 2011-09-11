@@ -1,5 +1,6 @@
 {
-  "name":"nowchat",
+  "name":"oasys",
+  "description": "Option Analyzing SYStem",
   "version":"0.0.1",
   "main":"./index.js",
   "directories":{
