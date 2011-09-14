@@ -16,6 +16,9 @@
   "dependencies":{
     "now":"",
 	"mongoose":"",
-	"Class":">= 0.1.1"
+	"coffee-script":"",
+	"express":"",
+	"jade":"",
+	"stylus":""
   }
 }
